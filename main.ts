@@ -1,5 +1,4 @@
 import{mkdirSync,readdirSync,readFileSync,writeFileSync}from'node:fs';
-import{join}from'node:path';
 function R(p:Uint8Array,q:Uint8Array){
 const D=new Int32Array(256),C=new Int32Array(64),M=new Int32Array(256),O=new Uint8Array(65536);
 let t=0,j=0,c=0,pc=0,ip=0,l=0,n=p.length;
@@ -54,8 +53,8 @@ return F(D[--j]&255);
 }}
 const I=process.env.MAKEFUN_INPUT_DIR??'/input',O=process.env.MAKEFUN_OUTPUT_DIR??'/output';
 for(const d of readdirSync(I).sort()){
-const r=R(new Uint8Array(readFileSync(join(I,d,'program.bin'))),new Uint8Array(readFileSync(join(I,d,'input.bin'))));
-mkdirSync(join(O,d),{recursive:true});
-writeFileSync(join(O,d,'stdout.bin'),r.o);
-writeFileSync(join(O,d,'exit.txt'),r.c+'\n');
+const r=R(new Uint8Array(readFileSync(I+'/'+d+'/program.bin')),new Uint8Array(readFileSync(I+'/'+d+'/input.bin')));
+mkdirSync(O+'/'+d,{recursive:true});
+writeFileSync(O+'/'+d+'/stdout.bin',r.o);
+writeFileSync(O+'/'+d+'/exit.txt',r.c+'\n');
 }
